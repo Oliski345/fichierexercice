@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import shutil
 # répertoire de travail actuel
 repertoire_actuelle = os.getcwd()
 print(repertoire_actuelle)
@@ -26,16 +27,39 @@ print(f"Nom du fichier: {nom}")
 # Obtenir l'extension
 extension = chemin.suffix
 print(f"Extension du fichier: {extension}")
-#Vérifier si le fichier existe
+# Vérifier si le fichier existe
 if chemin.exists():
     print("Le fichier existe")
 # chemin absolu
 chemin_absolu = chemin.absolute()
 print(f"Chemin absolu: {chemin_absolu}")
 # Joindre des chemins
-nouveau_chemin = Path("dossier")/"sous-dossier"/"fichier.txt"
+nouveau_chemin = Path("dossier") / "sous-dossier" / "fichier.txt"
 print(f"nouveau_chemin: {nouveau_chemin}")
 # répertoire de base
 home = Path.home()
 print(f"répertoire utilisateur: {home}")
 
+Path("SIM/chimie/Structure de données/ math").mkdir(parents=True, exist_ok=True)
+Path("SIM/Structure de données").mkdir(parents=True, exist_ok=True)
+Path("SIM/math").mkdir(parents=True, exist_ok=True)
+Path("e/f/g/h").mkdir(parents=True, exist_ok=True)
+
+# dossier vide
+# os.rmdir("SIM/Structure de données")
+# Path("SIM/chimie").rmdir()
+
+# dossier avec contenue
+# shutil.rmtree("SIM/math")
+
+
+# monchemin2 = "C:\\Nouveau dossier"
+# chemin_chimie = Path(monchemin2).joinpath("chimie")
+# (Path(monchemin2).joinpath("math")).mkdir(parents=True, exist_ok=True)
+# chemin_chimie.mkdir(parents=True, exist_ok=True)
+# chemin_math = Path(monchemin2).joinpath("math")
+# chemin_math_intra1 = chemin_math.joinpath("intra1")
+# chemin_math_intra1.mkdir(parents=True, exist_ok=True)
+# chemin_math_intra2 = chemin_math.joinpath("intra2")
+# chemin_math_intra2.mkdir(parents=True, exist_ok=True)
+# shutil.move(chemin_math_intra1, chemin_chimie)
