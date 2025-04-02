@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import shutil
+
 # répertoire de travail actuel
 repertoire_actuelle = os.getcwd()
 print(repertoire_actuelle)
@@ -88,7 +89,7 @@ class GestionNoteMathematique:
         if dossier_racine is None:
             self.dossier_racine = Path.home() / 'MathNotes'
         else:
-            mondossier_math = dossier_racine +"\\MathNotes"
+            mondossier_math = dossier_racine + "\\MathNotes"
             self.dossier_racine = Path(mondossier_math)
         self.categories = ["algebre", "analyse", "geometrie", "probabilites", "archives"]
 
@@ -103,7 +104,8 @@ class GestionNoteMathematique:
             dossier_categorie.mkdir(exist_ok=True)
 
         print(f"La structure de dossiers a été créée dans {self.dossier_racine}")
-    def creer_note(self,categorie, titre, contenu):
+
+    def creer_note(self, categorie, titre, contenu):
         """Cette méthode va créer une nouvelle mathématique dans la catégorie spécifiée"""
         categorie_valides = self.categories[:-1]
         if categorie not in categorie_valides:
@@ -112,16 +114,17 @@ class GestionNoteMathematique:
             return None
         date_actuelle = datetime.now().strftime("%d_%m_%Y_%H_%M_%S")
         nom_fichier = f"{date_actuelle}_{titre.replace(' ', '_')}.txt"
-        chemin_fichier = self.dossier_racine/categorie/nom_fichier # chemin complet du fichier
+        chemin_fichier = self.dossier_racine / categorie / nom_fichier  # chemin complet du fichier
 
         contenu_complet = f"Titre: {titre}\n Date: {date_actuelle}\n\n{contenu}"
         chemin_fichier.write_text(contenu_complet, encoding="utf-8")
         print(f"Note créée:{chemin_fichier}")
         return chemin_fichier
-    def rechercher_note_par_titre(self,titre):
+
+    def rechercher_note_par_titre(self, titre):
         """Rechercher la note par titre"""
         resultats = []
-        titre_lower =titre.lower()
+        titre_lower = titre.lower()
         categorie_valides = self.categories[:-1]
         for categorie in categorie_valides:
             dossier_categorie = self.dossier_racine / categorie
@@ -137,10 +140,7 @@ class GestionNoteMathematique:
                     except Exception as e:
                         print(f"Erreur lors de la lecture de {fichier}: {e}")
 
-
             return resultats
-
-
 
 
 monchemin2 = "C:\\Users\\2475333"
@@ -155,5 +155,5 @@ G1.creer_note("geometrie", "Théorème de Pythagore",
               "a² + b² = c²\n\nDans un triangle rectangle, "
               "le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.")
 print(" Recherche par titre pour le titre 'equation'")
-resultats_titre=G1.rechercher_note_par_titre("equation")
+resultats_titre = G1.rechercher_note_par_titre("equation")
 print(resultats_titre)
