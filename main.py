@@ -4,6 +4,8 @@ from pathlib import Path
 import shutil
 import json
 import csv
+from PIL import Image
+from PyPDF2 import PdfReader, PdfFileReader
 
 # répertoire de travail actuel
 repertoire_actuelle = os.getcwd()
@@ -260,3 +262,18 @@ with open("data.csv", "r") as f:
     reader = csv.reader(f)
     for row in reader:
         print(row)
+
+image = Image.open("daddy.jpg")
+# Affiche les informations
+print(image.format, image.size)
+
+# redimensionner
+image_redim = image.resize((600, 600))
+image_redim.save("image_redim.png", "PNG")
+
+reader = PdfReader("beauté.pdf")
+print(f"Nombre de page: {len(reader.pages)}")
+
+page = reader.pages[0]
+texte = page.extract_text()
+print(texte)
